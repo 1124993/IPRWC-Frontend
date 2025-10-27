@@ -1,8 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment'; // ← fixed path
 
 export const apiBaseInterceptor: HttpInterceptorFn = (req, next) => {
-    // Only rewrite relative API calls
     if (req.url.startsWith('/api/')) {
         req = req.clone({ url: `${environment.apiUrl}${req.url}` });
     }
