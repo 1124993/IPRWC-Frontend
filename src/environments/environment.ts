@@ -1,4 +1,4 @@
 export const environment = {
-    production: true,
-    apiUrl: 'https://iprwc-backend-production.up.railway.app', // adjust when deploying
+    production: false,
+    apiUrl: 'http://localhost:8080'  // your local backend URL
 };
