@@ -8,9 +8,11 @@ import { authInterceptor } from './core/auth/auth.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([
-      apiBaseInterceptor, // rewrites /api/... → environment.apiUrl + /api/...
-      authInterceptor     // adds Authorization, etc.
-    ])),
+    provideHttpClient(
+      withInterceptors([
+        apiBaseInterceptor, // 1) rewrite /api/... → https://backend/api/...
+        authInterceptor     // 2) add Authorization for both relative & absolute URLs
+      ])
+    ),
   ],
 };
