@@ -1,0 +1,40 @@
+.dialog-body {
+    display: grid;
+    gap: 12px;
+    min-width: 560px;
+}
+
+.subtitle {
+    color: rgba(0, 0, 0, .6);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+
+    .name {
+        font-weight: 500;
+    }
+
+    .qty {
+        color: rgba(0, 0, 0, .6);
+    }
+
+    .amount {
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}

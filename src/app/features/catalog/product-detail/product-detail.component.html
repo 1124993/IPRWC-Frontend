@@ -1,0 +1,36 @@
+<ng-container *ngIf="product() as p; else loadingOrNotFound">
+    <mat-card class="detail-card" appearance="outlined">
+        <div class="layout">
+            <div class="image-wrap">
+                <img *ngIf="p.imageUrl" [src]="p.imageUrl" [alt]="p.name" />
+            </div>
+
+            <div class="content">
+                <h2 class="title">{{ p.name }}</h2>
+
+                <mat-chip-set class="meta-chips">
+                    <mat-chip *ngIf="p.category" appearance="outlined">{{ p.category }}</mat-chip>
+                    <mat-chip *ngIf="p.stock !== undefined" appearance="outlined">In stock: {{ p.stock }}</mat-chip>
+                </mat-chip-set>
+
+                <p class="desc" *ngIf="p.description">{{ p.description }}</p>
+
+                <div class="price">{{ p.price | currency:'EUR':'symbol':'1.2-2' }}</div>
+
+                <div class="actions">
+                    <a mat-button routerLink="/products">Back to products</a>
+                    <button mat-raised-button color="primary" (click)="addToCart()" [disabled]="!isLoggedIn()">
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</ng-container>
+
+<ng-template #loadingOrNotFound>
+    <div class="center">
+        <mat-spinner diameter="36"></mat-spinner>
+        <p *ngIf="product() === null">Loading product…</p>
+    </div>
+</ng-template>

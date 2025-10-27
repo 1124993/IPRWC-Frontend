@@ -1,0 +1,32 @@
+/* Angular Material theming setup */
+@use '@angular/material' as mat;
+
+/* 1) Material base styles (ripples, a11y, etc.) */
+@include mat.core();
+
+/* 2) Define a light theme (you can change palettes later) */
+$ammaris-theme: mat.define-theme((color: (theme-type: light,
+            ),
+            typography: (brand-family: 'Inter, Roboto, Arial, sans-serif',
+                plain-family: 'Inter, Roboto, Arial, sans-serif',
+            ),
+            density: (scale: 0)));
+
+/* 3) Apply the theme to all components */
+:root {
+    @include mat.all-component-themes($ammaris-theme);
+}
+
+/* Global helpers */
+.container {
+    padding: 16px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+/* Optional: card look consistency */
+mat-card {
+    border-radius: 16px;
+}

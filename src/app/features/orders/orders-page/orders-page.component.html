@@ -1,0 +1,39 @@
+<section class="orders-page">
+    <header class="bar">
+        <h2>My Orders</h2>
+        <a mat-stroked-button routerLink="/products">
+            <mat-icon>shopping_bag</mat-icon> Continue Shopping
+        </a>
+    </header>
+
+    <!-- Loading -->
+    <div *ngIf="loading()" class="center">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading…</p>
+    </div>
+
+    <!-- Empty -->
+    <mat-card *ngIf="!loading() && orders().length === 0" appearance="outlined" class="empty">
+        <mat-card-content>
+            <p>You have no orders yet.</p>
+            <a mat-raised-button color="primary" routerLink="/products">
+                Browse products
+            </a>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- List -->
+    <div class="list" *ngIf="!loading() && orders().length > 0">
+        <mat-card class="order" *ngFor="let o of orders()" appearance="outlined">
+            <mat-card-title>Order #{{ o.id }}</mat-card-title>
+            <mat-card-subtitle>Placed: {{ o.createdAt | date:'medium' }}</mat-card-subtitle>
+
+            <mat-card-actions align="end">
+                <a mat-stroked-button [routerLink]="['/orders', o.id]">
+                    <mat-icon>receipt_long</mat-icon>
+                    View lines
+                </a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</section>

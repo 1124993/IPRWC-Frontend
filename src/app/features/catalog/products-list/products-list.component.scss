@@ -1,0 +1,161 @@
+:host {
+    display: block;
+}
+
+.products-page {
+    display: grid;
+    gap: 16px;
+}
+
+/* ===== Header (title, chips, sort) ===== */
+.page-header {
+    display: grid;
+    gap: 10px;
+}
+
+.filter-chips {
+    display: inline-flex;
+    gap: 6px;
+
+    /* slightly stronger look for selected */
+    .mdc-evolution-chip--selected {
+        font-weight: 600;
+    }
+}
+
+/* Sort controls appear UNDER the chips and are compact (chip-like) */
+.sort-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Make mat-form-field small like a chip */
+.sort-field {
+    width: auto;
+    min-width: 110px;
+
+    .mdc-text-field {
+        height: 32px !important;
+        min-height: 32px !important;
+        padding: 0 8px !important;
+        border-radius: 16px !important;
+    }
+
+    .mat-mdc-form-field-infix {
+        padding: 0 !important;
+        min-height: 32px !important;
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-mdc-select-trigger {
+        height: 32px !important;
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        line-height: 1;
+    }
+
+    .mat-mdc-form-field-outline {
+        border-radius: 16px !important;
+    }
+}
+
+/* Compact sort direction button */
+.sort-dir-btn {
+    width: 32px !important;
+    height: 32px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0;
+}
+
+/* ===== Loading / Empty ===== */
+.center {
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    min-height: 160px;
+}
+
+.empty {
+    text-align: center;
+    color: rgba(0, 0, 0, .6);
+}
+
+/* ===== Grid & Cards ===== */
+.grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+
+    /* Portrait image box (3:4) with no cropping */
+    .image-wrap {
+        aspect-ratio: 3 / 4;
+        width: 100%;
+        background: #f5f5f5;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 12px 12px 0 0;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+    }
+
+    .title {
+        margin: 8px 0 4px;
+        font-size: 16px;
+        line-height: 1.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* clamp to 2 lines */
+        -webkit-box-orient: vertical;
+    }
+
+    .meta {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+
+        .price {
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+    }
+
+    mat-card-actions {
+        padding-top: 0;
+    }
+}

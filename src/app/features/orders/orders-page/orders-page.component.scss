@@ -1,0 +1,30 @@
+:host {
+    display: block;
+}
+
+.orders-page {
+    display: grid;
+    gap: 16px;
+}
+
+.bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    min-height: 160px;
+}
+
+.empty {
+    text-align: center;
+}
+
+.list {
+    display: grid;
+    gap: 12px;
+}

@@ -1,0 +1,73 @@
+<mat-card class="cart-card" appearance="outlined">
+    <h2>Your Cart</h2>
+
+    <!-- Loading State -->
+    <div *ngIf="loading()" class="center">
+        <mat-spinner diameter="36"></mat-spinner>
+        <p>Loading cart…</p>
+    </div>
+
+    <!-- Content -->
+    <ng-container *ngIf="!loading()">
+
+        <!-- Empty Cart -->
+        <p *ngIf="items().length === 0" class="muted">
+            Your cart is empty.
+            <a routerLink="/products">Browse products</a>
+        </p>
+
+        <!-- Cart Items -->
+        <div *ngIf="items().length > 0" class="list">
+            <div class="row header">
+                <div class="col col-name">Item</div>
+                <div class="col col-price">Price</div>
+                <div class="col col-qty">Qty</div>
+                <div class="col col-total">Total</div>
+                <div class="col col-actions"></div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="row" *ngFor="let it of items()">
+                <div class="col col-name">{{ it.productName }}</div>
+                <div class="col col-price">{{ it.price | currency:'EUR':'symbol':'1.2-2' }}</div>
+
+                <div class="col col-qty qty-controls">
+                    <button mat-mini-fab (click)="dec(it)" aria-label="Decrease">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    <span class="qty">{{ it.quantity }}</span>
+                    <button mat-mini-fab (click)="inc(it)" aria-label="Increase">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+                <div class="col col-total">{{ it.lineTotal | currency:'EUR':'symbol':'1.2-2' }}</div>
+
+                <div class="col col-actions">
+                    <button mat-icon-button color="warn" (click)="remove(it)" aria-label="Remove">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <!-- Summary -->
+            <div class="summary">
+                <div class="label">Subtotal</div>
+                <div class="value">{{ total() | currency:'EUR':'symbol':'1.2-2' }}</div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <a mat-button routerLink="/products">Continue shopping</a>
+                <button mat-raised-button color="primary" (click)="checkout()"
+                    [disabled]="items().length === 0 || loading()">
+                    <mat-icon>payment</mat-icon>
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</mat-card>

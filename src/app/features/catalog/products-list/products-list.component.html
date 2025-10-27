@@ -1,0 +1,75 @@
+<section class="products-page">
+    <header class="page-header">
+        <h2>Products</h2>
+
+        <!-- Category Chips -->
+        <mat-chip-set class="filter-chips" aria-label="Filter by category">
+            <mat-chip-option [selected]="selectedCategory() === null" (click)="selectCategory(null)"
+                [selectable]="false" [removable]="false">
+                All
+            </mat-chip-option>
+
+            <mat-chip-option *ngFor="let c of categories()" [selected]="selectedCategory() === c"
+                (click)="selectCategory(c)" [selectable]="false" [removable]="false">
+                {{ c }}
+            </mat-chip-option>
+        </mat-chip-set>
+
+        <!-- Sort (compact, under chips) -->
+        <div class="sort-controls">
+            <mat-form-field appearance="outline" class="sort-field">
+                <mat-select [value]="sortBy()" (selectionChange)="setSortBy($event.value)">
+                    <mat-option value="name">Name</mat-option>
+                    <mat-option value="price">Price</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-icon-button class="sort-dir-btn" (click)="toggleSortDir()"
+                [attr.aria-label]="sortDir() === 'asc' ? 'Ascending' : 'Descending'">
+                <mat-icon>{{ sortDir() === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+            </button>
+        </div>
+    </header>
+
+    <!-- Loading -->
+    <div *ngIf="loading()" class="center">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading products…</p>
+    </div>
+
+    <!-- Empty -->
+    <div *ngIf="!loading() && (sortedProducts()?.length ?? 0) === 0" class="empty">
+        <p>No products match this filter.</p>
+        <a mat-button color="primary" (click)="selectCategory(null)">Clear filter</a>
+    </div>
+
+    <!-- Grid -->
+    <div *ngIf="!loading() && (sortedProducts()?.length ?? 0) > 0" class="grid">
+        <mat-card class="product-card" appearance="outlined" *ngFor="let p of sortedProducts()">
+            <div class="image-wrap">
+                <img [src]="p.imageUrl || ''" [alt]="p.name" loading="lazy" />
+            </div>
+
+            <mat-card-content>
+                <h3 class="title" [title]="p.name">{{ p.name }}</h3>
+
+                <div class="meta">
+                    <mat-chip-set class="chips" aria-label="product meta">
+                        <mat-chip *ngIf="p.category" appearance="outlined">{{ p.category }}</mat-chip>
+                        <mat-chip *ngIf="p.stock !== undefined" appearance="outlined">
+                            In stock: {{ p.stock }}
+                        </mat-chip>
+                    </mat-chip-set>
+
+                    <div class="price">{{ p.price | currency:'EUR':'symbol':'1.2-2' }}</div>
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <a mat-stroked-button color="primary" [routerLink]="['/products', p.id]">
+                    View details
+                </a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</section>

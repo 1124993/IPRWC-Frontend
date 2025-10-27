@@ -1,0 +1,33 @@
+<section class="order-lines">
+    <header class="bar">
+        <h2>Order #{{ orderId() }}</h2>
+        <a mat-stroked-button routerLink="/orders">
+            <mat-icon>arrow_back</mat-icon>
+            Back to My Orders
+        </a>
+    </header>
+
+    <div *ngIf="loading()" class="center">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading lines...</p>
+    </div>
+
+    <mat-card *ngIf="!loading()" appearance="outlined">
+        <mat-list>
+            <mat-list-item *ngFor="let ln of lines()">
+                <div class="row">
+                    <div class="name">{{ ln.productName }}</div>
+                    <div class="qty">× {{ ln.quantity }}</div>
+                    <div class="amount">{{ ln.lineTotal | currency:'EUR':'symbol':'1.2-2' }}</div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+
+        <mat-divider></mat-divider>
+
+        <div class="total">
+            <span>Total</span>
+            <strong>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</strong>
+        </div>
+    </mat-card>
+</section>

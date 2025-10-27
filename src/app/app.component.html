@@ -1,0 +1,52 @@
+<mat-toolbar color="primary" class="toolbar">
+  <!-- Left: Logo + Brand -->
+  <a class="brand" routerLink="/products" aria-label="Ammaris Home">
+    <img src="/assets/ammaris-logo.svg" alt="Ammaris logo" />
+    <span class="brand-text">Ammaris Shop</span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <!-- Account menu (visible when logged in) -->
+  <button *ngIf="isAuth()" mat-icon-button class="icon-btn" [matMenuTriggerFor]="accountMenu" aria-label="Account menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #accountMenu="matMenu">
+    <!-- Email (read-only) -->
+    <button mat-menu-item disabled>
+      <mat-icon>person</mat-icon>
+      <span>{{ email() || '—' }}</span>
+    </button>
+    
+
+    <!-- My Orders -->
+  <button mat-menu-item *ngIf="role() === 'USER'" [routerLink]="'/orders'">
+    <mat-icon>receipt_long</mat-icon>
+    <span>My Orders</span>
+  </button>
+  </mat-menu>
+
+  <!-- Cart icon (USER only) -->
+  <a *ngIf="isAuth() && role() === 'USER'" mat-icon-button class="icon-btn" routerLink="/cart" aria-label="Cart">
+    <mat-icon matBadge="{{ totalQty() }}" [matBadgeHidden]="totalQty() === 0" matBadgeColor="warn"
+      matBadgePosition="above after" matBadgeSize="medium">
+      shopping_cart
+    </mat-icon>
+  </a>
+
+  <!-- Logout icon (any authenticated user) -->
+  <button *ngIf="isAuth()" mat-icon-button class="icon-btn" aria-label="Logout" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <!-- Login button (when logged out) -->
+  <a *ngIf="!isAuth()" mat-button routerLink="/login">Login</a>
+</mat-toolbar>
+
+<main class="container">
+  <router-outlet />
+</main>
+
+<footer class="app-footer">
+  <span>Created by <strong>Ammar Etaki</strong> &nbsp;|&nbsp; Hogeschool Leiden - IPRWC &nbsp;|&nbsp; 2025</span>
+</footer>

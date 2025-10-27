@@ -1,0 +1,70 @@
+:host {
+    display: block;
+}
+
+.admin-products {
+    display: grid;
+    gap: 16px;
+}
+
+.bar {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+
+        .actions {
+            justify-self: start;
+        }
+    }
+}
+
+.center {
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    min-height: 160px;
+}
+
+.table-wrap {
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+th.right,
+td.right {
+    text-align: right;
+}
+
+.name-cell {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 10px;
+    align-items: center;
+
+    img {
+        width: 48px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 6px;
+        background: #f5f5f5;
+    }
+
+    .title {
+        font-weight: 600;
+    }
+
+    .desc {
+        color: rgba(0, 0, 0, .6);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 560px;
+    }
+}

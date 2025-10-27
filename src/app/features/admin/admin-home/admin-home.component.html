@@ -1,0 +1,37 @@
+<section class="admin-home">
+    <h2>Admin Dashboard</h2>
+
+    <div class="grid">
+        <mat-card class="tile">
+            <mat-card-header>
+                <mat-icon aria-hidden="true">inventory_2</mat-icon>
+                <mat-card-title>Products</mat-card-title>
+                <mat-card-subtitle>Manage catalog, prices, stock</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Create, edit, archive/unarchive products.</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <a mat-raised-button color="primary" routerLink="/admin/products">
+                    Go to Products
+                </a>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="tile">
+            <mat-card-header>
+                <mat-icon aria-hidden="true">receipt_long</mat-icon>
+                <mat-card-title>Orders</mat-card-title>
+                <mat-card-subtitle>View customer orders & lines</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Inspect orders and line items.</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <a mat-raised-button color="primary" routerLink="/admin/orders">
+                    Go to Orders
+                </a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</section>

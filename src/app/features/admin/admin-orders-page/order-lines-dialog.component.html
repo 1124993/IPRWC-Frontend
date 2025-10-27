@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>
+    Order #{{ data.orderId }} · {{ data.userEmail }}
+</h2>
+
+<div mat-dialog-content class="dialog-body">
+    <div class="subtitle">Placed: {{ data.createdAt | date:'medium' }}</div>
+
+    <ng-container *ngIf="!loading(); else loadingTpl">
+        <mat-list>
+            <mat-list-item *ngFor="let ln of lines()">
+                <div class="row">
+                    <div class="name">{{ ln.productName }}</div>
+                    <div class="qty">× {{ ln.quantity }}</div>
+                    <div class="amount">{{ ln.lineTotal | currency:'EUR':'symbol':'1.2-2' }}</div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+
+        <mat-divider></mat-divider>
+
+        <div class="total">
+            <span>Total</span>
+            <strong>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</strong>
+        </div>
+    </ng-container>
+
+    <ng-template #loadingTpl>
+        <div class="loading">
+            <mat-icon>hourglass_top</mat-icon>
+            Loading lines…
+        </div>
+    </ng-template>
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="close()">
+        <mat-icon>close</mat-icon>
+        Close
+    </button>
+</div>
